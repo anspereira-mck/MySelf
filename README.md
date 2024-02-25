@@ -27,3 +27,6 @@ yarn dev
 ## Source Project
 
 [Terminal](https://github.com/m4tt72/terminal)
+
+## TODO
+[] Add terraform Vercel and Netlify
