@@ -27,21 +27,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for Preview to be ready
-        uses: lewagon/wait-on-check-action@v1.3.1
+      - name: Wait for response     
+        uses: cygnetdigital/wait_for_response@v2.0.0
         with:
-          ref: ${{ github.ref }}
-          check-name: 'Preview'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-
-      - name: Test Preview
-        run: |
-          response_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4173/myself/)
-          if [ $response_code -eq 200 ]; then
-            echo "Preview is accessible."
-            exit 0
-          else
-            echo "Preview is not accessible. Status code: $response_code"
-            exit 1
-          fi
+          url: 'http://localhost:4175/myself/'
+          responseCode: '200,500'
+          timeout: 2000
+          interval: 500
