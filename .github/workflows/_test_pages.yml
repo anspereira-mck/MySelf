@@ -1,0 +1,32 @@
+
+name: Test GitHub Pages
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: yarn install
+      - name: preview
+        run: yarn preview
+      - name: Basic Running Test
+        run: |
+          response_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4173/myself/)
+          if [ $response_code -eq 200 ]; then
+            echo "Preview is accessible."
+            exit 0
+          else
+            echo "Preview is not accessible. Status code: $response_code"
+            exit 1
+          fi
