@@ -22,10 +22,9 @@ jobs:
 
       - name: Preview
         id: preview
-        run: yarn preview &
+        run: yarn preview
 
   test:
-    needs: preview
     runs-on: ubuntu-latest
     steps:
       - name: Wait for Preview to be ready
