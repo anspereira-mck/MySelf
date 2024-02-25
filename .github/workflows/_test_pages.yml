@@ -1,4 +1,3 @@
-
 name: Test GitHub Pages
 
 on:
@@ -9,18 +8,39 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
         run: yarn install
-      - name: preview
+
+      - name: Preview
+        id: preview
         run: yarn preview
-      - name: Basic Running Test
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - name: Wait for Preview to be ready
+        uses: octokit/wait-for-job@v2
+        with:
+          job-id: ${{ needs.build.outputs['id'] }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test Preview
         run: |
           response_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4173/myself/)
           if [ $response_code -eq 200 ]; then
