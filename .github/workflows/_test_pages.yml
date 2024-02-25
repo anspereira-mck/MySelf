@@ -25,7 +25,7 @@ jobs:
 
       - name: Preview
         id: preview
-        run: yarn preview
+        run: yarn preview &
 
   test:
     needs: build
