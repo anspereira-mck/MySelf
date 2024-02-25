@@ -9,5 +9,5 @@ export default defineConfig({
     port: 3000,
   },
   //MySelf Github Pages
-  base: process.env.PREVIEW === 'true' ? '/' : '/MySelf/',
+  base: process.env.PREVIEW === 'true' ? '/' : '/myself/',
 });
