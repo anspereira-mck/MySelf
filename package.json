@@ -34,7 +34,7 @@
     "build": "vite build",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "export PREVIEW=true && vite preview"
   },
   "social": {
     "type": "Linkedin",
