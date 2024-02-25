@@ -6,11 +6,8 @@ on:
       - dev
 
 jobs:
-  build:
+  preview:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
 
       - name: Install dependencies
         run: yarn install
@@ -28,17 +25,14 @@ jobs:
         run: yarn preview &
 
   test:
-    needs: build
+    needs: preview
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
     steps:
       - name: Wait for Preview to be ready
-        uses: octokit/wait-for-job@v2
+        uses: yogeshlonkar/wait-for-jobs@v0
         with:
-          job-id: ${{ needs.build.outputs['id'] }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          jobs: 'preview'
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test Preview
         run: |
