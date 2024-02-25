@@ -33,5 +33,5 @@ jobs:
         with:
           url: 'http://localhost:4173/myself/'
           responseCode: '200,500'
-          timeout: 2000
+          timeout: 9000
           interval: 500
