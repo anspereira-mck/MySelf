@@ -23,6 +23,7 @@ jobs:
 
       - name: Preview
         run: yarn preview
+        timeout-minutes: 1
 
   test:
     runs-on: ubuntu-latest
@@ -30,7 +31,7 @@ jobs:
       - name: Wait for response     
         uses: cygnetdigital/wait_for_response@v2.0.0
         with:
-          url: 'http://localhost:4175/myself/'
+          url: 'http://localhost:4173/myself/'
           responseCode: '200,500'
           timeout: 2000
           interval: 500
