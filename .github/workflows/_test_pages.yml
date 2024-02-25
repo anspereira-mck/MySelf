@@ -28,10 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for Preview to be ready
-        uses: yogeshlonkar/wait-for-jobs@v0
+        uses: lewagon/wait-on-check-action@v1.3.1
         with:
-          jobs: 'preview'
-          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.ref }}
+          check-name: 'Preview'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
 
       - name: Test Preview
         run: |
