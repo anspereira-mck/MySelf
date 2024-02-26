@@ -5,11 +5,13 @@ import { history } from '../stores/history';
 import { theme } from '../stores/theme';
 
 const hostname = window.location.hostname;
+//"top [number]" command: This command displays the top "number" most relevant projects based on user input (e.g., "top 3 web development projects").
 
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
   help: () => 'Available commands: ' + Object.keys(commands).join(', '),
   hostname: () => hostname,
-  whoami: () => JSON.stringify(aboutMe, null, 2),
+  //whoami: () => JSON.stringify(aboutMe, null, 2),
+  whoami: () => `Alan Santos Pereira`,
   date: () => new Date().toLocaleString(),
   emacs: () => `why use emacs? try 'vim'`,
   echo: (args: string[]) => args.join(' '),
@@ -17,6 +19,69 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     window.open(packageJson.social.url);
 
     return `Permission denied: unable to run the command '${args[0]}' as root.`;
+  },
+  about: (args: string[]) => {
+    const usage = `Usage: about [args].
+    [args]:
+      personal: list all available themes
+      career: set theme to [theme]
+
+    [Examples]:
+      about personal info
+      about career info
+    `;
+    const person_usage = `Usage: about personal [args].
+    [args]:
+      info: List personal details
+      skills: set of personal skills
+      edu: List os education and training details
+
+    [Examples]:
+      about personal info
+      about personal skills
+    `;
+    const career_usage = `Usage: about career [args].
+    [args]:
+      info: List career details
+      skills: set of career skills
+
+    [Examples]:
+      about career info
+      about career skills
+    `;
+
+    if (args.length === 0) {
+      return usage;
+    }
+
+    switch (args[0]) {
+      case 'personal': {
+        if (args.length === 1) {
+          return usage;
+        }
+      }
+
+      case 'set': {
+        if (args.length !== 2) {
+          return usage;
+        }
+
+        const selectedTheme = args[1];
+        const t = themes.find((t) => t.name.toLowerCase() === selectedTheme);
+
+        if (!t) {
+          return `Theme '${selectedTheme}' not found. Try 'theme ls' to see all available themes.`;
+        }
+
+        theme.set(t);
+
+        return `Theme set to ${selectedTheme}`;
+      }
+
+      default: {
+        return usage;
+      }
+    }
   },
   theme: (args: string[]) => {
     const usage = `Usage: theme [args].

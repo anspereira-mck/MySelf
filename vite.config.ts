@@ -7,4 +7,6 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  //MySelf Github Pages
+  base: '/myself/',
 });

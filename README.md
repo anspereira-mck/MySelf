@@ -1,4 +1,4 @@
-# [ansperson | Profile](anspereira-mck.github.io)
+# [AnsPerson | Profile](anspereira-mck.github.io)
 
 Alan Pereira Profile
 
@@ -11,6 +11,12 @@ docker run -d --name terminal -p 3000:3000 .
 ```
 
 ### Using npm/yarn
+
+0. Set up pre-commit
+
+```bash
+pre-commit install
+```
 
 1. Install dependencies:
 
@@ -27,3 +33,7 @@ yarn dev
 ## Source Project
 
 [Terminal](https://github.com/m4tt72/terminal)
+
+## TODO
+
+[] Add terraform Vercel and Netlify

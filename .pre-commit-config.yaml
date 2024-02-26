@@ -29,7 +29,6 @@ repos:
         args: ['--autofix', --indent=2]
       - id: trailing-whitespace
 
-
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 2.1.6
     hooks:
