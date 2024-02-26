@@ -19,6 +19,7 @@
 <main
   class="h-full border-2 rounded-md p-4 overflow-auto text-xs sm:text-sm md:text-base"
   style={`background-color: ${$theme.background}; color: ${$theme.foreground}; border-color: ${$theme.green};`}
+  data-testid="alive"
 >
   <History />
 
