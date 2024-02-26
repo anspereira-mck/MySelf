@@ -12,6 +12,12 @@ docker run -d --name terminal -p 3000:3000 .
 
 ### Using npm/yarn
 
+0. Set up pre-commit
+
+```bash
+pre-commit install
+```
+
 1. Install dependencies:
 
 ```bash
@@ -31,4 +37,3 @@ yarn dev
 ## TODO
 
 [] Add terraform Vercel and Netlify
-
