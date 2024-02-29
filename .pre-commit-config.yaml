@@ -52,6 +52,13 @@ repos:
     hooks:
       - id: markdownlint
 
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.1.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [--strict, --force-scope, feat, fix, chore, test, custom]
+
   # - repo: https://github.com/python-jsonschema/check-jsonschema
   #   rev: 0.27.0
   #   hooks:
