@@ -1,6 +1,6 @@
 # [Alan Pereira | Profile](ansperson.github.io/myself/)
 
-![GitHub deployments](https://img.shields.io/github/deployments/ansperson/myself/github-pages?style=flat-square&label=Deployment)
+![GitHub deployments](https://img.shields.io/github/deployments/ansperson/myself/gh-pages?style=flat-square&label=Deployment)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ansperson/myself/pages.yml?style=flat-square&label=Actions)
 ![OSSF-Scorecard Score](https://img.shields.io/ossf-scorecard/github.com/ansperson/myself?style=flat-square&label=openssf%20scorecard)
 
