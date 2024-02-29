@@ -2,8 +2,8 @@
 
 Alan Pereira Profile
 
-![Deployment: ](https://img.shields.io/github/deployments/ansperson/myself/github-pages?style=flat&link=https%3A%2F%2Fansperson.github.io%2Fmyself%2F)
-![Actions Workflow Status: ](https://img.shields.io/github/actions/workflow/status/ansperson/myself/pages.yml)
+![GitHub deployments](https://img.shields.io/github/deployments/ansperson/myself/github-pages?style=flat-square&label=Deployment)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ansperson/myself/pages.yml?style=flat-square&label=Actions)
 
 ## Quick Start
 
