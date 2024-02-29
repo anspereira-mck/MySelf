@@ -32,7 +32,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/anspereira-mck/myself_term"
+    "url": "https://github.com/ansperson/myself"
   },
   "scripts": {
     "build": "vite build",

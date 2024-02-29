@@ -7,8 +7,26 @@ import { theme } from '../stores/theme';
 const hostname = window.location.hostname;
 //"top [number]" command: This command displays the top "number" most relevant projects based on user input (e.g., "top 3 web development projects").
 
+function isMobileDevice(): boolean {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
-  help: () => 'Available commands: ' + Object.keys(commands).join(', '),
+  help: () => {
+    const allCommands = Object.keys(commands);
+    const isMobile = isMobileDevice();
+
+    if (isMobile) {
+        const commandsPerLine = 7;
+        let output = 'Available commands:';
+        for (let i = 0; i < allCommands.length; i += commandsPerLine) {
+            output += '\n' + allCommands.slice(i, i + commandsPerLine).join(', ');
+        }
+        return output;
+    } else {
+        return 'Available commands: ' + allCommands.join(', ');
+    }
+},
   hostname: () => hostname,
   //whoami: () => JSON.stringify(aboutMe, null, 2),
   whoami: () => `Alan Santos Pereira`,
@@ -161,7 +179,25 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   exit: () => {
     return 'Please close the tab to exit.';
   },
-  banner: () => `
+  banner: () => {
+  if (isMobileDevice()) {
+    return `
+ █████╗ ██╗      █████╗ ███╗   ██╗
+██╔══██╗██║     ██╔══██╗████╗  ██║
+███████║██║     ███████║██╔██╗ ██║
+██╔══██║██║     ██╔══██║██║╚██╗██║
+██║  ██║███████╗██║  ██║██║ ╚████║
+╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝
+██████╗ ███████╗██████╗ ███████╗ ██████╗ ███╗   ██╗
+██╔══██╗██╔════╝██╔══██╗██╔════╝██╔═══██╗████╗  ██║
+██████╔╝█████╗  ██████╔╝███████╗██║   ██║██╔██╗ ██║
+██╔═══╝ ██╔══╝  ██╔══██╗╚════██║██║   ██║██║╚██╗██║
+██║     ███████╗██║  ██║███████║╚██████╔╝██║ ╚████║
+╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
+                                                    `;}
+
+
+  return `
    █████╗ ██╗      █████╗ ███╗   ██╗    ██████╗ ███████╗██████╗ ███████╗██╗██████╗  █████╗
   ██╔══██╗██║     ██╔══██╗████╗  ██║    ██╔══██╗██╔════╝██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
   ███████║██║     ███████║██╔██╗ ██║    ██████╔╝█████╗  ██████╔╝█████╗  ██║██████╔╝███████║
@@ -170,5 +206,6 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═ v${packageJson.version}
 
 Type 'help' to see list of available commands.
-`,
+`;
+  },
 };
