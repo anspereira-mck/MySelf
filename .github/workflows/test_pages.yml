@@ -3,7 +3,8 @@ name: Test GitHub Pages
 on:
   push:
     branches:
-      - dev
+      - feat
+      - fix
 
 jobs:
   preview:
