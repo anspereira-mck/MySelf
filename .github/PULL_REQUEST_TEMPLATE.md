@@ -1,12 +1,8 @@
----
-title: "[Default Pull Request Title]"
----
-
-### Description
+# Description
 
 Please provide a brief description of the changes included in this pull request.
 
-### Checklist
+## Checklist
 
 - [ ] Tests added
 - [ ] Documentation updated
