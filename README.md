@@ -1,6 +1,7 @@
-# [AnsPerson | Profile](ansperson.github.io/myself/)
+# [Alan Pereira | Profile](ansperson.github.io/myself/)
 
-Alan Pereira Profile
+![GitHub deployments](https://img.shields.io/github/deployments/ansperson/myself/github-pages?style=flat-square&label=Deployment)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ansperson/myself/pages.yml?style=flat-square&label=Actions)
 
 ## Quick Start
 
