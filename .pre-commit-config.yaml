@@ -63,7 +63,7 @@ repos:
     hooks:
       - id: no-commit-to-branch
       # Only accepts commits to feat or fix branches
-        args: ['--pattern', '^(?!((fix|feat)\/[a-zA-Z0-9\-]+)$).*']
+        args: ['--pattern', '^(?!((fix/*|feat/*)\/[a-zA-Z0-9\-]+)$).*']
 
   # - repo: https://github.com/python-jsonschema/check-jsonschema
   #   rev: 0.27.0
