@@ -8,25 +8,30 @@ const hostname = window.location.hostname;
 //"top [number]" command: This command displays the top "number" most relevant projects based on user input (e.g., "top 3 web development projects").
 
 function isMobileDevice(): boolean {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
   help: () => {
     const allCommands = Object.keys(commands);
     const isMobile = isMobileDevice();
+    const commandsPerLine = 7;
+
+    let output = 'Available commands: ';
 
     if (isMobile) {
-        const commandsPerLine = 7;
-        let output = 'Available commands:';
-        for (let i = 0; i < allCommands.length; i += commandsPerLine) {
-            output += '\n' + allCommands.slice(i, i + commandsPerLine).join(', ');
-        }
-        return output;
+      const firstLineCommands = allCommands.slice(0, 4);
+      output += firstLineCommands.join(', ') + '\n';
+
+      for (let i = 4; i < allCommands.length; i += commandsPerLine) {
+        output += allCommands.slice(i, i + commandsPerLine).join(', ') + '\n';
+      }
     } else {
-        return 'Available commands: ' + allCommands.join(', ');
+      output += allCommands.join(', ');
     }
-},
+
+    return output;
+  },
   hostname: () => hostname,
   //whoami: () => JSON.stringify(aboutMe, null, 2),
   whoami: () => `Alan Santos Pereira`,
@@ -181,20 +186,16 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   },
   banner: () => {
   if (isMobileDevice()) {
-    return `
- █████╗ ██╗      █████╗ ███╗   ██╗
-██╔══██╗██║     ██╔══██╗████╗  ██║
-███████║██║     ███████║██╔██╗ ██║
-██╔══██║██║     ██╔══██║██║╚██╗██║
-██║  ██║███████╗██║  ██║██║ ╚████║
-╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝
-██████╗ ███████╗██████╗ ███████╗ ██████╗ ███╗   ██╗
-██╔══██╗██╔════╝██╔══██╗██╔════╝██╔═══██╗████╗  ██║
-██████╔╝█████╗  ██████╔╝███████╗██║   ██║██╔██╗ ██║
-██╔═══╝ ██╔══╝  ██╔══██╗╚════██║██║   ██║██║╚██╗██║
-██║     ███████╗██║  ██║███████║╚██████╔╝██║ ╚████║
-╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
-                                                    `;}
+  return `
+   █████╗ ███████╗██████╗
+  ██╔══██╗██╔════╝██╔══██╗
+  ███████║███████╗██████╔╝
+  ██╔══██║╚════██║██╔═══╝
+  ██║  ██║███████║██║
+  ╚═╝  ╚═╝╚══════╝╚═╝v${packageJson.version}
+
+  Type 'help' to see list of available commands.`;
+  }
 
 
   return `

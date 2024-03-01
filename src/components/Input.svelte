@@ -30,26 +30,31 @@
 
   const handleKeyDown = async (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
-      const [commandName, ...args] = command.split(' ');
+      if (command.trim() !== '') {
+        const [commandName, ...args] = command.split(' ');
+        if (import.meta.env.VITE_TRACKING_ENABLED === 'true') {
+          track(commandName, ...args);
+        }
 
-      if (import.meta.env.VITE_TRACKING_ENABLED === 'true') {
-        track(commandName, ...args);
-      }
-
-      const commandFunction = commands[commandName];
-
-      if (commandFunction) {
-        const output = await commandFunction(args);
-
-        if (commandName !== 'clear') {
+        const commandFunction = commands[commandName];
+        if (commandFunction) {
+          const output = await commandFunction(args);
+          if (commandName !== 'clear') {
+            $history = [...$history, { command, outputs: [output] }];
+          }
+        }
+        else
+        {
+          const output = `${commandName}: command not found`;
           $history = [...$history, { command, outputs: [output] }];
         }
-      } else {
-        const output = `${commandName}: command not found`;
-
-        $history = [...$history, { command, outputs: [output] }];
       }
-
+        else
+      {
+        //const output = '';
+        $history = [...$history, { command, outputs: [''] }];
+      }
+    //Clear the input after the command is executed
       command = '';
     } else if (event.key === 'ArrowUp') {
       if (historyIndex < $history.length - 1) {
